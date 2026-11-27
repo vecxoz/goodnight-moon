@@ -177,8 +177,7 @@ class MultimodalClassifier(torch.nn.Module):
         self.image_feature_extractor = model.model.encoder
         image_feat_dim = self.image_feature_extractor.config.d_model
         # Text
-        config = AutoConfig.from_pretrained(text_encoder_name)
-        self.text_feature_extractor = AutoModel.from_config(config)
+        self.text_feature_extractor = AutoModel.from_pretrained(text_encoder_name)
         text_feat_dim = self.text_feature_extractor.config.hidden_size
         # Fusion
         self.fc_fusion = torch.nn.Linear(image_feat_dim + text_feat_dim, hidden_dim)
